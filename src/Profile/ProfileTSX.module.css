@@ -1,0 +1,6 @@
+.main {
+    grid-area: m;
+    background-color: antiquewhite;
+    color: blue;
+    margin: 0 auto;
+}

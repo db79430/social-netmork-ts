@@ -1,0 +1,19 @@
+
+.main {
+    grid-area: di;
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+.dialogs {
+    padding: 10px;
+    color: pink;
+
+
+
+}
+
+
+
+
+
