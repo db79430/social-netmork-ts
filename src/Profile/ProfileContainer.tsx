@@ -1,7 +1,7 @@
 import React from "react";
 import {
     getUsersProfile, getUserStatus,
-     updateUserStatus
+    updateUserStatus
 } from "../Redux/post-reducer";
 import {Profile} from "./ProfileTSX";
 import {connect} from "react-redux";
@@ -20,7 +20,7 @@ type MapStateProfileType = {
 }
 
 
-type MapDispatchProfileType ={
+type MapDispatchProfileType = {
     getUsersProfile: (usersId: string) => void
     getUserStatus: (usersId: string) => void
     updateUserStatus: (status: string) => void
@@ -32,17 +32,16 @@ type MatchParamsType = {
 
 type PropsMatchType = RouteComponentProps<MatchParamsType> & ProfileContainerType
 
-class ProfileContainer extends React.Component<PropsMatchType>{
+class ProfileContainer extends React.Component<PropsMatchType> {
     componentDidMount() {
         let usersId = this.props.match.params.usersId
         this.props.getUsersProfile(usersId)
         this.props.getUserStatus(usersId)
         this.props.updateUserStatus('')
 
-       /* axios.get(`https://social-network.samuraijs.com/1.0/profile/+ usersID`)*/
     }
 
-    render () {
+    render() {
 
 
         return (
@@ -64,16 +63,13 @@ class ProfileContainer extends React.Component<PropsMatchType>{
 }
 
 
-
-
-
- const mapStateToProps = (state: AppStateType): MapStateProfileType => {
+const mapStateToProps = (state: AppStateType): MapStateProfileType => {
     return {
         profile: state.post.profile,
         status: state.post.status
     }
 
-   }
+}
 
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {getUsersProfile, getUserStatus, updateUserStatus}),

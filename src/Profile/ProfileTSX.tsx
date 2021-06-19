@@ -27,7 +27,7 @@ export const Profile = (props: ProfilePropsType ) => {
                          status={props.status}
                          getUsersProfile={props.getUsersProfile}
                          profile={props.profile} />
-            <MyPostsContainer/>
+            <MyPostsContainer />
 
 
         </div>

@@ -27,9 +27,7 @@ export const getUsers2 = (currentPage: number, pageSize: number) => {
 
 
 export const getProfileUsers = (usersId: number) => {
-    return instance.get(`profile/`+ usersId).then(response => {
-        return response.data
-    })
+    return profileApi.getProfile(usersId)
 }
 
 export const authApi = {
@@ -41,20 +39,6 @@ export const authApi = {
 
 
 }
-
-export const profileApi = {
-    getProfile(usersId: number){
-        return instance.get(`profile/`+ usersId)
-    },
-    getStatus(usersId: number) {
-        return instance.get(`profile/status/`+ usersId)
-    },
-    updateStatus(status: string) {
-        return instance.put(`profile/status/`, {status})
-    }
-
-}
-
 export const getFollowUsers = (userId: number) => {
     return instance.post(`follow/{userId}`, {}).then(response => {
         return response.data
@@ -67,6 +51,21 @@ export const getUnFollowUsers = (userId: number) => {
     })
 
 }
+
+export const profileApi = {
+    getProfile(usersId: number){
+        return instance.get(`profile/`+ usersId)
+    },
+    getStatus(usersId: number) {
+        return instance.get(`profile/status/`+ usersId)
+    },
+    updateStatus(status: string) {
+        return instance.put(`profile/status/`, {status: status})
+    }
+
+}
+
+
 
 
 function me() {

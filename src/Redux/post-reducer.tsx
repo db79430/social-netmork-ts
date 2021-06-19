@@ -1,6 +1,8 @@
 import React from "react";
 import {MyPostsType} from "../Profile/MyPosts/MyPostsContainer";
 import {getProfileUsers, profileApi} from "../api/API";
+import {Dispatch} from "redux";
+
 export type PostPageType = {
     messagesPost: Array<MyPostsType>,
     messageNewPostText: string
@@ -127,7 +129,7 @@ export const setStatusProfileAC = (status: string) => {
 
 
 export const getUsersProfile = (usersId: number) => {
-    return (dispatch: any) => {
+    return (dispatch:Dispatch) => {
         getProfileUsers(usersId).then(data => {
            dispatch(setUsersProfileAC(data))
 
@@ -138,7 +140,7 @@ export const getUsersProfile = (usersId: number) => {
 
 
 export const getUserStatus = (usersId: number) => {
-    return (dispatch: any) => {
+    return (dispatch:Dispatch) => {
         profileApi.getStatus(usersId).then(response=> {
             dispatch(setStatusProfileAC(response.data))
 
@@ -148,7 +150,7 @@ export const getUserStatus = (usersId: number) => {
 }
 
 export const updateUserStatus = (status: string) => {
-    return (dispatch: any) => {
+    return (dispatch: Dispatch) => {
         profileApi.updateStatus(status).then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(setStatusProfileAC(response.data))

@@ -21,7 +21,7 @@ export const UsersFunctional = (props: UsersMapsType & OnChangeType) => {
         <div>
             {
                 pages.map(p => {
-                    return <span /*className={props.currentPage === p && s.selectPage}*/
+                    return <span
                         onClick={(e) => {
                             props.onPageChange(p)
                         }}>{p}</span>
@@ -43,29 +43,10 @@ export const UsersFunctional = (props: UsersMapsType & OnChangeType) => {
 
 
                             }}>UnFollow</button>
-                                // props.toggleIsFollowing(true)
-                                //
-                                // getFollowUsers().then(data => {
-                                //     if (data.resultCode === 0) {
-                                //         props.follow(u.id)
-                                //
-                                //     }
-                                //     props.toggleIsFollowing(false)
-                                // })
 
                             : <button disabled={props.InProgress.some(id => id === u.id)} onClick={() => {
-                                // props.toggleIsFollowing(true)
-                                //
-                                //
-                                // getUnFollowUsers().then(response => {
-                                //     if (response.data.resultCode === 0) {
-                                //         props.unfollow(u.id)
-                                //
-                                //     }
-                                //     props.toggleIsFollowing(false)
-                                // })
-                                unfollowThunk(u.id)
 
+                                unfollowThunk(u.id)
 
 
                             }}>Follow</button>
@@ -75,14 +56,14 @@ export const UsersFunctional = (props: UsersMapsType & OnChangeType) => {
 
 
                 </span>
-                    <span>
-                    <div>{u.followed}</div>
-                    <div>{u.status}</div>
-                </span>
-                    <span>
-                    <div>{u.location.city}</div>
-                     <div>{u.location.country}</div>
-                </span>
+                {/*    <span>*/}
+                {/*    <div>{u.followed}</div>*/}
+                {/*    <div>{u.status}</div>*/}
+                {/*</span>*/}
+                {/*    <span>*/}
+                {/*    <div>{u.location.city}</div>*/}
+                {/*     <div>{u.location.country}</div>*/}
+                {/*</span>*/}
                 </div>
             )
         }

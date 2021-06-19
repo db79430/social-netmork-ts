@@ -25,7 +25,7 @@ type UnFollowACType = {
 
 type SetUsersType = {
     type: 'SET-USERS'
-    users: Array<UsersType>
+    users: Array<UsersType>,
 
 }
 
@@ -128,9 +128,12 @@ export const UsersReducer = (state: InitialUsersType = initialState, action: Act
                 )
             };
         case "SET-USERS":
+
             return {
+
                 ...state,
-                users: [...state.users, ...action.users]
+                users: [...state.users, ...action.users],
+
             };
         case "PAGE-USERS":
             return {
@@ -156,7 +159,7 @@ export const UsersReducer = (state: InitialUsersType = initialState, action: Act
             }
 
         default:
-            return state
+            return state;
 
 
     }
@@ -217,7 +220,7 @@ export const getUsersThunkCreater = (currentPage: number, pageSize: number) => {
         dispatch(toggleIsFetchingAC(true))
         getUsers(currentPage, pageSize).then(data => {
             dispatch(toggleIsFetchingAC(false))
-            dispatch(setUsersAC(data.item))
+            dispatch(setUsersAC(data.items))
             dispatch(setTotalUsersCountAC(data.totalCount))
 
 
@@ -230,7 +233,7 @@ export const getAuthUsersData = (currentPage: number, pageSize: number) => {
         dispatch(setCurrentPageAC(currentPage))
         getUsers2(currentPage, pageSize).then(data => {
             dispatch(toggleIsFetchingAC(false))
-            dispatch(setUsersAC(data.item))
+            dispatch(setUsersAC(data.items))
 
         })
     }
@@ -238,7 +241,7 @@ export const getAuthUsersData = (currentPage: number, pageSize: number) => {
 
     export const followThunk = (userId: number) => {
         return (dispatch: any, getState: any) => {
-            dispatch(toggleIsFetchingAC(true))
+            dispatch(toggleIsFetchingAC(false))
 
             getFollowUsers(userId).then(data => {
                 if (data.resultCode === 0) {

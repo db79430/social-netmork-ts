@@ -1,21 +1,7 @@
 import React, {ChangeEvent, useState} from "react";
 import s from './MyPosts.module.css';
 import {Post} from "./Posts/Post";
-/*import {
-    PostPageType,
-    RootStateType,
-    StoreType,
-    store,
-
-
-} from "../../Redux/store";*/
-import {
-    ActionUpdatePostType,
-    ActionAddPostType,
-    addActionCreater,
-    addUPDATEActionCreater
-} from "../../Redux/post-reducer";
-
+import {addActionCreater} from "../../Redux/post-reducer";
 
 type MyPostsType = {
     message: string;
@@ -27,8 +13,9 @@ type MyPostsType = {
 export type MessagePosts = {
     messagesPost: Array<MyPostsType>
     messageNewPostText: string;
-    addUPDATE: () => void
-    addAction: (messageNewPostText: string) => void
+    addActionCreater: (postText: string) => void
+    addUPDATEActionCreater : (newText: string) => void
+
 
 
 }
@@ -42,7 +29,8 @@ export const MyPosts = (props: MessagePosts) => {
     let addButtonClick = () => {
 
         {
-            props.addUPDATE()
+            props.addActionCreater(props.messageNewPostText)
+
 
 
         }
@@ -52,7 +40,7 @@ export const MyPosts = (props: MessagePosts) => {
 
     let onPostChangeValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
 
-        props.addAction(props.messageNewPostText)
+        props.addUPDATEActionCreater(props.messageNewPostText)
     }
 
     return (
@@ -73,11 +61,7 @@ export const MyPosts = (props: MessagePosts) => {
                 postElement
             }
 
-
-            {/* <Post message="Hey!"/>
-            <Post message="How are you?"/>*/}
-
-        </div>
+       </div>
 
 
     )

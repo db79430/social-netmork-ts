@@ -20,10 +20,6 @@ import {getUsers, getUsers2} from "../api/API";
 import {WithAuthRedirect} from "../hoc/WithAuthRedirect";
 import {compose, Dispatch} from "redux";
 
-/*type UsersAPIType = {
-    componentDidMount: () => void
-    onPageChange: () => void
-}*/
 export type MapStatePropsType = {
     usersPage: InitialUsersType
     currentPage: number
@@ -119,38 +115,4 @@ export default compose<React.ComponentType>(
         })
 )(UsersAPIComponents)
 
-
-/*
-function APIUsersType(props: any, APIUsersType: any) {
-    throw new Error("Function not implemented.");
-}
-
-function APIType(props: any, APIType: any) {
-    throw new Error("Function not implemented.");
-}
-*/
-
-/*const mapDispatchToProps = (dispatch: Dispatch): MapStateDispatchType => {
-    return {
-        follow: (usersID: number) => {
-            dispatch(followAC(usersID))
-        },
-        unfollow: (usersID: number) => {
-            dispatch(unfollowAC(usersID))
-        },
-        setUsers: (users: Array<UsersType>) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPages: (numberPage: number) => {
-            dispatch(setCurrentPageAC(numberPage))
-        },
-        setTotalCounters: (totalCount: number) => {
-            dispatch(setTotalUsersCountAC(totalCount))
-        },
-        toggleIsFetching: (isFetching: boolean) => {
-            dispatch(toggleIsFetchingAC(isFetching))
-        }
-
-    }
-}*/
 
