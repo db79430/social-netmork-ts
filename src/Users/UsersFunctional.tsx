@@ -3,7 +3,7 @@ import ava from "../img/ava.png"
 import {NavLink} from "react-router-dom";
 import {UsersMapsType} from "./UsersClassContainer";
 import {getFollowUsers, getUnFollowUsers, getUsers} from "../api/API";
-import {followThunk, unfollowThunk} from "../Redux/users-reducer";
+import {followThunk, unfollowThunk, UsersType} from "../Redux/users-reducer";
 
 type OnChangeType = {
     onPageChange: (numberPage: number) => void
@@ -17,7 +17,7 @@ export const UsersFunctional = (props: UsersMapsType & OnChangeType) => {
         pages.push(i)
     }
 
-    return <div>
+    return (<div>
         <div>
             {
                 pages.map(p => {
@@ -39,14 +39,14 @@ export const UsersFunctional = (props: UsersMapsType & OnChangeType) => {
                     <div>
                         {u.followed
                             ? <button disabled={props.InProgress.some(id => id === u.id)} onClick={() => {
-                                followThunk(u.id)
+                                unfollowThunk(u.id)
 
 
                             }}>UnFollow</button>
 
                             : <button disabled={props.InProgress.some(id => id === u.id)} onClick={() => {
 
-                                unfollowThunk(u.id)
+                                followThunk(u.id)
 
 
                             }}>Follow</button>
@@ -56,18 +56,18 @@ export const UsersFunctional = (props: UsersMapsType & OnChangeType) => {
 
 
                 </span>
-                {/*    <span>*/}
-                {/*    <div>{u.followed}</div>*/}
-                {/*    <div>{u.status}</div>*/}
-                {/*</span>*/}
-                {/*    <span>*/}
-                {/*    <div>{u.location.city}</div>*/}
-                {/*     <div>{u.location.country}</div>*/}
-                {/*</span>*/}
+                    <span>
+                    <div>{u.followed}</div>
+                    <div>{u.status}</div>
+                </span>
+                    <span>
+                    <div>{u.location.city}</div>
+                     <div>{u.location.country}</div>
+                </span>
                 </div>
             )
         }
 
-    </div>
+    </div>)
 }
 

@@ -1,5 +1,5 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import {PostReducer} from "./post-reducer";
+import {ProfileReducer} from "./profile-reducer";
 import {DialogsReducer} from "./dialogs-reducer";
 import {SidebarReducer} from "./sidebar-reducer";
 import {UsersReducer} from "./users-reducer";
@@ -7,7 +7,7 @@ import {AuthReducer} from "./auth-reducer";
 import thunkMiddleware from 'redux-thunk'
 const reducer = combineReducers(
     {
-        post:PostReducer,
+        post:ProfileReducer,
         dialogs: DialogsReducer,
         sidebar: SidebarReducer,
         users: UsersReducer,

@@ -55,28 +55,24 @@ const initialState: InitialStatePostType = {
 }
 
 
-export const PostReducer = (state: InitialStatePostType = initialState, action: ActionType) => {
+export const ProfileReducer = (state: InitialStatePostType = initialState, action: ActionType) => {
     switch (action.type) {
         case 'ADD-POST':
             let newPost = {
                 id: 5,
-                message: action.postText /*action.postText*/ //this._state.newPost;
+                message: action.postText
             }
             let copyState = {...state}
             copyState.postPage.messagesPost = [...state.postPage.messagesPost]
             copyState.postPage.messagesPost.push(newPost)
 
 
-            /*state.postPage.messagesPost.push(newPost)*/
             return copyState;
 
 
         case "UPDATE-NEW-POST":
             let newCopyState = {...state}
             newCopyState.postPage.messageNewPostText = action.newText
-
-
-            /*state.postPage.messageNewPostText = action.newText*/
             return newCopyState
         case "SET-USERS-PROFILE":
             return {

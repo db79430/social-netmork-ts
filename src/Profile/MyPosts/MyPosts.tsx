@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useState} from "react";
 import s from './MyPosts.module.css';
 import {Post} from "./Posts/Post";
-import {addActionCreater} from "../../Redux/post-reducer";
+import {addActionCreater} from "../../Redux/profile-reducer";
 
 type MyPostsType = {
     message: string;

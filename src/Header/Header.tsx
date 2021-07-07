@@ -8,7 +8,7 @@ type HeaderType = {
 }
 
 
-export const Header = (props:HeaderType) => {
+export const Header = (props: HeaderType) => {
     return (
         <header className={s.header}>
             <div className={s.loginBlock}>

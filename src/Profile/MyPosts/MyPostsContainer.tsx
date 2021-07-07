@@ -4,7 +4,7 @@ import {
     addActionCreater,
     addUPDATEActionCreater,
     InitialStatePostType
-} from "../../Redux/post-reducer";
+} from "../../Redux/profile-reducer";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/redux-store";

@@ -9,9 +9,6 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
 
 export type ProfilePropsType = {
-    /*messagesPost: Array<MyPostsType>;*/
-    /* dispatch: (action: ActionAddPostType | ActionUpdatePostType ) => void*/
-    /* store: StoreType*/
     profile: any
     getUsersProfile: (usersId: string) => void
     status: string

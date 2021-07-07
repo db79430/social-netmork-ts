@@ -1,8 +1,8 @@
 import React from "react"
 import {Header} from "./Header";
 import {connect} from "react-redux";
-import {getAuthUsersData, setAuthUsersDataAC} from "../Redux/auth-reducer";
 import {AppStateType} from "../Redux/redux-store";
+import {getAuthUsersData} from "../Redux/auth-reducer";
 
 
 export type MapStateAuthPropsType = {

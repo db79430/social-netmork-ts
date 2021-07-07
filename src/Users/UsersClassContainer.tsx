@@ -1,24 +1,17 @@
-import React from "react";
-import {connect} from "react-redux";
-import {AppStateType} from "../Redux/redux-store";
+import React from 'react';
+import {connect} from 'react-redux';
+import {AppStateType} from '../Redux/redux-store';
 import {
-    followAC, followThunk, getAuthUsersData, getUsersThunkCreater,
+     followThunk, getUsersData, getUsersThunkCreater,
     InitialUsersType,
     setCurrentPageAC,
-    setTotalUsersCountAC,
-    setUsersAC, toggleIsFetchingAC, toggleIsFollowingAC,
-    unfollowAC, unfollowThunk,
-    UsersType
-} from "../Redux/users-reducer";
-
-
-import axios from "axios";
-
-import {Preloader} from "../common/Pleloader";
-import {UsersFunctional} from "./UsersFunctional";
-import {getUsers, getUsers2} from "../api/API";
-import {WithAuthRedirect} from "../hoc/WithAuthRedirect";
-import {compose, Dispatch} from "redux";
+    unfollowThunk,
+    UsersType,
+} from '../Redux/users-reducer';
+import {UsersFunctional} from './UsersFunctional';
+import {WithAuthRedirect} from '../hoc/WithAuthRedirect';
+import {compose} from 'redux';
+import {Preloader} from '../common/Pleloader';
 
 export type MapStatePropsType = {
     usersPage: InitialUsersType
@@ -42,7 +35,7 @@ export type MapStateDispatchType = {
     getUsersThunkCreater: (currentPage: number, pageSize: number) => void
     followThunk: (userId: number) => void
     unfollowThunk: (userId: number) => void
-    getAuthUsersData: (currentPage: number, pageSize: number) => void
+    getUsersData: (currentPage: number, pageSize: number) => void
 
 
 }
@@ -58,7 +51,7 @@ class UsersAPIComponents extends React.Component<UsersMapsType> {
     }
 
     onPageChange() {
-        this.props.getAuthUsersData(this.props.currentPage, this.props.pageSize)
+        this.props.getUsersData(this.props.currentPage, this.props.pageSize)
 
     }
 
@@ -67,7 +60,7 @@ class UsersAPIComponents extends React.Component<UsersMapsType> {
             {
                 this.props.isFetching ? <Preloader/> : null
             }
-            <UsersFunctional getAuthUsersData={this.props.getAuthUsersData}
+            <UsersFunctional getUsersData={this.props.getUsersData}
                              unfollowThunk={this.props.unfollowThunk}
                              followThunk={this.props.followThunk}
                              getUsersThunkCreater={this.props.getUsersThunkCreater}
@@ -111,7 +104,7 @@ export default compose<React.ComponentType>(
             followThunk,
             unfollowThunk,
             getUsersThunkCreater,
-            getAuthUsersData
+            getUsersData
         })
 )(UsersAPIComponents)
 

@@ -45,7 +45,7 @@ export const setAuthUsersDataAC = (data: InitialUsersAuthType): SetUsersData => 
     return {type: "SET-USERS-DATA", data}
 }
 
-export const  getAuthUsersData = () => (dispatch: any) => {
+export const  getAuthUsersData = () => (dispatch: Dispatch) => {
         authApi.me().then(data => {
             if (data.resultCode === 0) {
                 dispatch(setAuthUsersDataAC(data.data))

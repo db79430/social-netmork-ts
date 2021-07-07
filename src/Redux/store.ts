@@ -1,6 +1,6 @@
 
 
-import {ActionType} from "./post-reducer";
+import {ActionType} from "./profile-reducer";
 import {ActionDialogsType} from "./dialogs-reducer";
 
 /*

@@ -1,7 +1,7 @@
 import {getFollowUsers, getUnFollowUsers, getUsers, getUsers2} from "../api/API";
 import {Dispatch} from "redux";
 
-export  type UsersType = {
+export type UsersType = {
     id: number,
     followed: boolean,
     fullName: string,
@@ -95,8 +95,9 @@ const initialState: InitialUsersType = {
     pageSize: 1,
     totalCount: 0,
     currentPage: 10,
-    isFetching: false,
-    InProgress: []
+    isFetching: true,
+    InProgress: [],
+
 
 }
 
@@ -200,26 +201,26 @@ export const setTotalUsersCountAC = (totalCount: number) => {
     }
 }
 
-export const toggleIsFetchingAC = (isFetching: boolean) => {
+export const setToggleIsFetchingAC = (isFetching: boolean) => {
     return {
         type: 'TOGGLE-IS-FETCHING',
         isFetching
     }
 }
 
-export const toggleIsFollowingAC = (isFetching: boolean, usersId: number, InProgress: []) => {
+export const toggleIsFollowingAC = (isFetching: boolean, usersId: number) => {
     return {
         type: 'TOGGLE-IS-FOLLOWING',
-        isFetching, usersId, InProgress
+        isFetching, usersId
     }
 
 }
 
 export const getUsersThunkCreater = (currentPage: number, pageSize: number) => {
-    return (dispatch: any) => {
-        dispatch(toggleIsFetchingAC(true))
+    return (dispatch: Dispatch) => {
+        dispatch(setToggleIsFetchingAC(true))
         getUsers(currentPage, pageSize).then(data => {
-            dispatch(toggleIsFetchingAC(false))
+            dispatch(setToggleIsFetchingAC(false))
             dispatch(setUsersAC(data.items))
             dispatch(setTotalUsersCountAC(data.totalCount))
 
@@ -228,11 +229,11 @@ export const getUsersThunkCreater = (currentPage: number, pageSize: number) => {
     }
 }
 
-export const getAuthUsersData = (currentPage: number, pageSize: number) => {
-    return (dispatch: any) => {
+export const getUsersData = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch) => {
         dispatch(setCurrentPageAC(currentPage))
         getUsers2(currentPage, pageSize).then(data => {
-            dispatch(toggleIsFetchingAC(false))
+            dispatch(setToggleIsFetchingAC(false))
             dispatch(setUsersAC(data.items))
 
         })
@@ -240,15 +241,14 @@ export const getAuthUsersData = (currentPage: number, pageSize: number) => {
 }
 
     export const followThunk = (userId: number) => {
-        return (dispatch: any, getState: any) => {
-            dispatch(toggleIsFetchingAC(false))
+        return (dispatch: Dispatch) => {
+            dispatch(toggleIsFollowingAC(true, userId))
 
             getFollowUsers(userId).then(data => {
                 if (data.resultCode === 0) {
                     dispatch(followAC(userId))
 
                 }
-                /*dispatch(toggleIsFollowingAC(true, userId, []))*/
 
             })
 
@@ -258,7 +258,7 @@ export const getAuthUsersData = (currentPage: number, pageSize: number) => {
 
     export const unfollowThunk = (userId: number) => {
         return (dispatch: any) => {
-            dispatch(toggleIsFetchingAC(true))
+            dispatch(setToggleIsFetchingAC(true))
 
 
             getUnFollowUsers(userId).then(response => {
@@ -266,7 +266,6 @@ export const getAuthUsersData = (currentPage: number, pageSize: number) => {
                     dispatch(unfollowAC(userId))
 
                 }
-                /*dispatch(toggleIsFollowingAC(false, userId, []))*/
             })
 
         }

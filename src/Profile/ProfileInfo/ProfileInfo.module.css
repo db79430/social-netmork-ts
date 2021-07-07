@@ -3,10 +3,20 @@
     background-color: antiquewhite;
     color: blue;
 }
-.ava img {
+.ava  {
     width: 50px;
     height: 50px;
     padding: 10px;
+}
+
+.img {
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+}
+
+.item {
+
 }
 
 
