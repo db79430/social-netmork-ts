@@ -20,19 +20,19 @@ type UpdateNewMessageTextStateType = {
 
 type SendMessageType = {
     type: 'SEND-MESSAGE'
-    newMessageText : string
+    newMessageText: string
 }
 
- export type ACDialogsType = {
-    dispatch: (action: | ActionNewMessageType | ActionSendMessage  )  => void
+export type ACDialogsType = {
+    dispatch: (action: | ActionNewMessageType | ActionSendMessage) => void
 }
 
- export type ActionDialogsType = UpdateNewMessageTextStateType| SendMessageType
- export type IntialStateType = {
+export type ActionDialogsType = UpdateNewMessageTextStateType | SendMessageType
+export type IntialStateType = {
 
-     dialogsPage: DialogsPropsType
+    dialogsPage: DialogsPropsType
 
- }
+}
 
 
 const initialState: IntialStateType = {
@@ -55,33 +55,23 @@ const initialState: IntialStateType = {
     }
 }
 
- export const DialogsReducer = (state: IntialStateType = initialState, action: ActionDialogsType) => {
 
-    /*let copyState;*/
-    /*copyState.dialogsPage.messagesData = [...state.dialogsPage.messagesData]*/
+export const DialogsReducer = (state: IntialStateType = initialState, action: ActionDialogsType) => {
+
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-TEXT":
-            /*copyState =*/ return {
+            return {
                 ...state,
                 newMessageText: action.newMessageText
             }
-            /*copyState.dialogsPage.newMessageText = action.newMessageText;*/
-            /*return copyState*/
-
 
         case "SEND-MESSAGE":
             let newMessageText = state.dialogsPage.newMessageText;
-            return  {
+            return {
                 ...state,
-                messagesData: [...state.dialogsPage.messagesData,{id: 4, message: newMessageText} ],
+                messagesData: [...state.dialogsPage.messagesData, {id: 4, message: newMessageText}],
                 newMessageText: '',
-               }
-
-            /*state.dialogsPage.newMessageText = '';
-            copyState.dialogsPage.messagesData = [...state.dialogsPage.messagesData]*/
-           /* copyState.dialogsPage.messagesData.push({id: 4, message: newMessageText});*/
-
-            /*return copyState;*/
+            }
 
         default:
             return state;
@@ -91,13 +81,13 @@ const initialState: IntialStateType = {
 }
 export const addUPDATENewMessageAC = (newMessageText: string) => {
     return {
-        type :"UPDATE-NEW-MESSAGE-TEXT",
+        type: "UPDATE-NEW-MESSAGE-TEXT",
         newMessageText: newMessageText
     } as const
 }
 export const addSendMessageAC = () => {
     return {
-        type :"SEND-MESSAGE"
+        type: "SEND-MESSAGE"
     } as const
 }
 

@@ -1,9 +1,12 @@
 import React from "react";
-import ava from "../img/ava.png"
 import {NavLink} from "react-router-dom";
 import {UsersMapsType} from "./UsersClassContainer";
-import {getFollowUsers, getUnFollowUsers, getUsers} from "../api/API";
-import {followThunk, unfollowThunk, UsersType} from "../Redux/users-reducer";
+import {followThunk, unfollowThunk} from "../Redux/users-reducer";
+import {inspect} from "util";
+import styles = module
+import * as module from "module";
+
+
 
 type OnChangeType = {
     onPageChange: (numberPage: number) => void
@@ -33,7 +36,8 @@ export const UsersFunctional = (props: UsersMapsType & OnChangeType) => {
                 <span>
                     <div>
                         <NavLink to={'/profile/' + u.id}>
-                        <img src={ava}/>
+                        <img src={u.photos.small != null ? u.photos.small: userPhoto }
+                        className={styles.userPhoto}/>
                         </NavLink>
                     </div>
                     <div>

@@ -93,7 +93,8 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
         totalCount: state.users.totalCount,
         currentPage: state.users.currentPage,
         isFetching: state.users.isFetching,
-        InProgress: state.users.InProgress
+        InProgress: state.users.InProgress,
+
 
     }
 }
