@@ -50,7 +50,7 @@ export const MyPosts = (props: MessagePosts) => {
                 My posts
             </div>
             <div>
-                <textarea onChange={onPostChangeValue} value={props.messageNewPostText}></textarea>
+                <textarea onChange={onPostChangeValue} value={props.messageNewPostText}>{props.messageNewPostText}</textarea>
 
             </div>
             <div>

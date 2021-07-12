@@ -24,7 +24,7 @@ export const Message = (props: MessageType) => {
             <div className={s.message}>
 
                 <div>
-                    <textarea ref={newDialogElement}>Add Message</textarea>
+                    <textarea ref={newDialogElement}></textarea>
 
                 </div>
                 <div>

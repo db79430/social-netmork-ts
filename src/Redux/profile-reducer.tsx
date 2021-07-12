@@ -24,7 +24,9 @@ type UpdateNewPostType = {
 
 type UsersProfileType = {
     type: 'SET-USERS-PROFILE'
-    profile: any
+    profile: null
+
+
 }
 type StatusProfileType = {
     type: 'SET-STATUS'

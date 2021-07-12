@@ -2,14 +2,14 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import {UsersMapsType} from "./UsersClassContainer";
 import {followThunk, unfollowThunk} from "../Redux/users-reducer";
-import {inspect} from "util";
-import styles = module
-import * as module from "module";
+import styles from './Users.module.css'
+
 
 
 
 type OnChangeType = {
     onPageChange: (numberPage: number) => void
+
 }
 
 
@@ -34,9 +34,10 @@ export const UsersFunctional = (props: UsersMapsType & OnChangeType) => {
         {
             props.usersPage.users.map(u => <div key={u.id}>
                 <span>
+
                     <div>
                         <NavLink to={'/profile/' + u.id}>
-                        <img src={u.photos.small != null ? u.photos.small: userPhoto }
+                        <img src={u.photos.small != null ? u.photos.small: "" }
                         className={styles.userPhoto}/>
                         </NavLink>
                     </div>
@@ -64,10 +65,10 @@ export const UsersFunctional = (props: UsersMapsType & OnChangeType) => {
                     <div>{u.followed}</div>
                     <div>{u.status}</div>
                 </span>
-                    <span>
-                    <div>{u.location.city}</div>
+                  {/*  <span><div>{u.location.city}</div>
                      <div>{u.location.country}</div>
-                </span>
+
+                </span>*/}
                 </div>
             )
         }
