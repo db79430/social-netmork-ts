@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import s from './Message.module.css';
 import {NavLink} from "react-router-dom";
 
@@ -17,14 +17,14 @@ export const Message = (props: MessageType) => {
         let text = newDialogElement.current?.value;
         alert(text)
     }
-
+debugger
     return (
         <div className={s.message}> {props.message}
-            <NavLink to={"/message/" + props.id}></NavLink>
-            <div className={s.message}>
+            <NavLink to={"/messages/" + props.id}/>
+           <div className={s.message}>
 
                 <div>
-                    <textarea ref={newDialogElement}></textarea>
+                    {/*<textarea ref={newDialogElement}></textarea>*/}
 
                 </div>
                 <div>
@@ -33,6 +33,7 @@ export const Message = (props: MessageType) => {
                 </div>
 
             </div>
+
 
 
         </div>

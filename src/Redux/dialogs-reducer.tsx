@@ -6,17 +6,17 @@ import {InitialUsersAuthType} from "./auth-reducer";
 export type DialogsPropsType = {
     messagesData: Array<MessageType>
     dialogs: Array<DialogType>
-    newMessageText: string
+
 
 }
 
 
-type UpdateNewMessageTextStateType = {
+/*type UpdateNewMessageTextStateType = {
     type: 'UPDATE-NEW-MESSAGE-TEXT'
     newMessageText: string
 
 
-}
+}*/
 
 type SendMessageType = {
     type: 'SEND-MESSAGE'
@@ -24,10 +24,10 @@ type SendMessageType = {
 }
 
 export type ACDialogsType = {
-    dispatch: (action: | ActionNewMessageType | ActionSendMessage) => void
+    dispatch: (action:  /*ActionNewMessageType*/  ActionSendMessage) => void
 }
 
-export type ActionDialogsType = UpdateNewMessageTextStateType | SendMessageType
+export type ActionDialogsType = /*UpdateNewMessageTextStateType*/ | SendMessageType
 export type IntialStateType = {
 
     dialogsPage: DialogsPropsType
@@ -51,7 +51,7 @@ const initialState: IntialStateType = {
             {id: 2, message: 'Hello'},
             {id: 3, message: 'How are you'},
         ],
-        newMessageText: ''
+
     }
 }
 
@@ -59,18 +59,18 @@ const initialState: IntialStateType = {
 export const DialogsReducer = (state: IntialStateType = initialState, action: ActionDialogsType) => {
 
     switch (action.type) {
-        case "UPDATE-NEW-MESSAGE-TEXT":
+        /*case "UPDATE-NEW-MESSAGE-TEXT":
             return {
                 ...state,
                 newMessageText: action.newMessageText
-            }
+            }*/
 
         case "SEND-MESSAGE":
-            let newMessageText = state.dialogsPage.newMessageText;
+            let newMessage = action.newMessageText;
             return {
                 ...state,
-                messagesData: [...state.dialogsPage.messagesData, {id: 4, message: newMessageText}],
-                newMessageText: '',
+                messagesData: [...state.dialogsPage.messagesData, {id: 4, message: newMessage}],
+
             }
 
         default:
@@ -79,19 +79,20 @@ export const DialogsReducer = (state: IntialStateType = initialState, action: Ac
 
     }
 }
-export const addUPDATENewMessageAC = (newMessageText: string) => {
+/*export const addUPDATENewMessageAC = (newMessageText: string) => {
     return {
         type: "UPDATE-NEW-MESSAGE-TEXT",
         newMessageText: newMessageText
-    } as const
-}
-export const addSendMessageAC = () => {
+    } as const*/
+// }
+export const addSendMessageAC = (newMessageText: string) => {
     return {
-        type: "SEND-MESSAGE"
+        type: "SEND-MESSAGE",
+        newMessageText
     } as const
 }
 
 
-export type ActionNewMessageType = ReturnType<typeof addUPDATENewMessageAC>
+/*export type ActionNewMessageType = ReturnType<typeof addUPDATENewMessageAC>*/
 export type ActionSendMessage = ReturnType<typeof addSendMessageAC>
 

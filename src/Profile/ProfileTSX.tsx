@@ -5,6 +5,7 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {addSendMessageAC} from "../Redux/dialogs-reducer";
 
 
 
@@ -13,6 +14,7 @@ export type ProfilePropsType = {
     getUsersProfile: (usersId: string) => void
     status: string
     updateUserStatus: (status: string) => void
+
 
 }
 
@@ -24,7 +26,7 @@ export const Profile = (props: ProfilePropsType ) => {
                          status={props.status}
                          getUsersProfile={props.getUsersProfile}
                          profile={props.profile} />
-            <MyPostsContainer />
+            <MyPostsContainer  />
 
 
         </div>

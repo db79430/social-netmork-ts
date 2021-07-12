@@ -5,22 +5,17 @@ import {Dispatch} from "redux";
 
 export type PostPageType = {
     messagesPost: Array<MyPostsType>,
-    messageNewPostText: string
+
 
 
 }
 
 type AddPostType = {
     type: 'ADD-POST'
-
-    postText: string
+    messageNewPostText: string
 }
 
-type UpdateNewPostType = {
-    type: 'UPDATE-NEW-POST',
-    newText: string
 
-}
 
 type UsersProfileType = {
     type: 'SET-USERS-PROFILE'
@@ -34,11 +29,11 @@ type StatusProfileType = {
 }
 
 
- export type ActionType = AddPostType | UpdateNewPostType | UsersProfileType | StatusProfileType
+ export type ActionType = AddPostType |  UsersProfileType | StatusProfileType
 
  export type InitialStatePostType = {
-    postPage: PostPageType
-     profile: any
+    postPage: PostPageType,
+     profile: null,
      status: string
 
 }
@@ -46,7 +41,6 @@ type StatusProfileType = {
 const initialState: InitialStatePostType = {
     profile: null,
     postPage: {
-        messageNewPostText: '',
         messagesPost: [
             {"id": 1, "message": 'Hi',},
             {"id": 2, "message": 'How are you?'}],
@@ -62,7 +56,7 @@ export const ProfileReducer = (state: InitialStatePostType = initialState, actio
         case 'ADD-POST':
             let newPost = {
                 id: 5,
-                message: action.postText
+                message: action.messageNewPostText
             }
             let copyState = {...state}
             copyState.postPage.messagesPost = [...state.postPage.messagesPost]
@@ -71,11 +65,6 @@ export const ProfileReducer = (state: InitialStatePostType = initialState, actio
 
             return copyState;
 
-
-        case "UPDATE-NEW-POST":
-            let newCopyState = {...state}
-            newCopyState.postPage.messageNewPostText = action.newText
-            return newCopyState
         case "SET-USERS-PROFILE":
             return {
                 ...state,
@@ -96,19 +85,14 @@ export const ProfileReducer = (state: InitialStatePostType = initialState, actio
 
 
 
-export const addActionCreater = (postText: string) => {
+export const addActionCreater = (messageNewPostText: string) => {
     return {
         type: "ADD-POST",
-        postText: postText
+        messageNewPostText
     } as const
 }
 
-export const addUPDATEActionCreater = (newText: string) => {
-    return {
-        type: "UPDATE-NEW-POST",
-        newText: newText
-    } as const
-}
+
 
 export const setUsersProfileAC = (profile: any) => {
     return {
@@ -162,4 +146,3 @@ export const updateUserStatus = (status: string) => {
 
 export type ActionAddPostType = ReturnType<typeof addActionCreater>
 
-export type ActionUpdatePostType = ReturnType<typeof addUPDATEActionCreater>

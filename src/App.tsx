@@ -26,9 +26,7 @@ const App: React.FC<AppPropsType> = () => {
             <div className="app-wrapper-content">
                 <Switch>
                     <Route exact path={'/dialogs'} render={() => <DialogsContainer />}/>
-                    <Route path={'/profile/:usersID?'}
-                           render={() => <ProfileContainer
-                           />}/>
+                    <Route path={'/profile/:usersID?'} render={() => <ProfileContainer/>}/>
                     <Route path={'/news'} render={() => <News/>}/>
                     <Route path={'/settings'} render={() => <Settings/>}/>
                     <Route path={'/music'} render={() => <Music/>}/>

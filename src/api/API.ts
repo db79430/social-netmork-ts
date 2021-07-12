@@ -54,16 +54,25 @@ export const getUnFollowUsers = (userId: number) => {
 }
 
 export const profileApi = {
-    getProfile(usersId: number){
-        return instance.get(`profile/`+ usersId)
+    getProfile(userId: number){
+        return instance.get(`profile/`+ userId)
     },
-    getStatus(usersId: number) {
-        return instance.get(`profile/status/`+ usersId)
+    getStatus(userId: number) {
+        return instance.get(`profile/status/`+ userId)
     },
     updateStatus(status: string) {
         return instance.put(`profile/status/`, {status: status})
     }
 
+}
+
+
+export const loginForm = {
+    getLogin(userId: number) {
+        return instance.post('/auth/login/' + userId).then(response => {
+            return response.data
+        })
+    }
 }
 
 
