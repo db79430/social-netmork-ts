@@ -4,6 +4,7 @@ import {Post} from "./Posts/Post";
 import {addActionCreater} from "../../Redux/profile-reducer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {DialogsPropsType} from "../../Dialogs/Dialogs";
+import {requiredField} from "../../utils/validators/Validation";
 
 type MyPostsType = {
     message: string;
@@ -14,7 +15,6 @@ type MyPostsType = {
 
 export type MessagePosts = {
     messagesPost: Array<MyPostsType>
-    messageNewPostText: string;
     addActionCreater: (messageNewPostText: string) => void
 
 
@@ -49,11 +49,11 @@ export const MyPosts = (props: MessagePosts) => {
 }
 
 
-export const MyPostForm: React.FC<InjectedFormProps<MessagePosts>> = (props) => {
+export const MyPostForm: React.FC<InjectedFormProps<PostDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field component='textarea' name={'messageNewPostText'} placeholder='Enter your post'/>
+                <Field component='textarea' name={'messageNewPostText'} placeholder='Enter your post' validate={[requiredField, maxLength15, minLength2]}/>
             </div>
             <div>
                 <button>Click</button>
@@ -62,4 +62,4 @@ export const MyPostForm: React.FC<InjectedFormProps<MessagePosts>> = (props) => 
     )
 }
 
-const MyPostReduxForm = reduxForm<MessagePosts>({form: 'addMessagePost'})(MyPostForm)
+const MyPostReduxForm = reduxForm<PostDataType>({form: 'addMessagePost'})(MyPostForm)

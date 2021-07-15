@@ -17,7 +17,7 @@ export const Message = (props: MessageType) => {
         let text = newDialogElement.current?.value;
         alert(text)
     }
-debugger
+
     return (
         <div className={s.message}> {props.message}
             <NavLink to={"/messages/" + props.id}/>

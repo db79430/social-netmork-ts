@@ -55,7 +55,7 @@ export const ProfileReducer = (state: InitialStatePostType = initialState, actio
     switch (action.type) {
         case 'ADD-POST':
             let newPost = {
-                id: 5,
+                id: 6,
                 message: action.messageNewPostText
             }
             let copyState = {...state}

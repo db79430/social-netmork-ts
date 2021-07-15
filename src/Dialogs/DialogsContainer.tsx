@@ -13,6 +13,7 @@ import {AppStateType, store} from "../Redux/redux-store";
 
 type MapStateDialogsType = {
     dialogs: Array<DialogType>
+    messagesData: Array<MessageType>
 
 }
 
@@ -26,11 +27,7 @@ type DialogsContainerType = MapDispatchDialogsType & MapStateDialogsType
 
 const DialogsContainer = (props: DialogsContainerType) => {
     return (<>
-        <Dialogs messagesData={props.}       addSendMessage={props.addSendMessage}  /*addUPDATENewMessage={props.addUPDATENewMessage}*/
-                 /*addSendMessage={props.addSendMessage}*/
-
-                 dialogs={props.dialogs}
-                /* newMessageText={props.newMessageText}*//>
+        <Dialogs messagesData={props.messagesData}  addSendMessage={props.addSendMessage}  dialogs={props.dialogs}/>
     </>)
 
 }
@@ -39,6 +36,7 @@ const DialogsContainer = (props: DialogsContainerType) => {
 let mapStateToProps = (state: AppStateType):MapStateDialogsType => {
     return {
         dialogs: state.dialogs.dialogsPage.dialogs,
+        messagesData: state.dialogs.dialogsPage.messagesData
     }
 }
 

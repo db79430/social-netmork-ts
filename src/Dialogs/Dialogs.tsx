@@ -23,7 +23,8 @@ export type DialogsPropsType = {
 }
 
 type MessageFormDataType = {
-    newMessageText: string
+    newMessageText: string,
+
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -36,11 +37,10 @@ export const Dialogs = (props: DialogsPropsType) => {
     }
 
 
-    /*const onSubmit = (formData: MessageFormDataType) => {
+    const onSubmit = (formData: MessageFormDataType) => {
         console.log(formData)
 
     }
-*/
 
 
     return (
