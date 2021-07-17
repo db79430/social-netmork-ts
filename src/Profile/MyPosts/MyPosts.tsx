@@ -4,7 +4,8 @@ import {Post} from "./Posts/Post";
 import {addActionCreater} from "../../Redux/profile-reducer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {DialogsPropsType} from "../../Dialogs/Dialogs";
-import {requiredField} from "../../utils/validators/Validation";
+import {maxLengthCreater, requiredField} from "../../utils/validators/Validation";
+import {Textarea} from "../../common/FormsControls/Formscontrols";
 
 type MyPostsType = {
     message: string;
@@ -48,12 +49,13 @@ export const MyPosts = (props: MessagePosts) => {
     )
 }
 
+let maxLength10 = maxLengthCreater(10)
 
 export const MyPostForm: React.FC<InjectedFormProps<PostDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field component='textarea' name={'messageNewPostText'} placeholder='Enter your post' validate={[requiredField, maxLength15, minLength2]}/>
+                <Field component={Textarea} name={'messageNewPostText'} placeholder='Enter your post' validate={[requiredField, maxLength10]}/>
             </div>
             <div>
                 <button>Click</button>

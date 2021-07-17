@@ -12,8 +12,8 @@ type RequiredFieldType = {
 
 }
 
-export const maxLengthCreater = (maxLength) => (value:RequiredFieldType)  => {
-    if (value.length > maxLength) return 'Max lenght is ${maxLength} symbols';
+export const maxLengthCreater = (maxLength: number) => (value:RequiredFieldType)  => {
+    if (value.value.length > maxLength) return 'Max lenght is ${maxLength} symbols';
     return undefined
 
 }
