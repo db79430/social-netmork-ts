@@ -1,9 +1,10 @@
 import React from "react";
+import styles from "./FormsControls.module.css"
 
 
-export const Textarea= () => {
+export const Textarea= ({...props}) => {
     return(
-        <div>
+        <div className={styles.formControl}>
             <textarea />
         </div>
 
