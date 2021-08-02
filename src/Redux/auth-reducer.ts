@@ -1,5 +1,7 @@
 import {authApi} from "../api/API";
 import {Dispatch} from "redux";
+import  {stopSubmit} from "redux-form/lib/actions";
+
 
 
 export type InitialUsersAuthType = {
@@ -11,19 +13,17 @@ export type InitialUsersAuthType = {
 }
 type SetUsersData = {
     type: "SET-USERS-DATA"
-    data : InitialUsersAuthType
+    data: InitialUsersAuthType
 }
 
- export const initialState: InitialUsersAuthType = {
-    id: 2,
-    email: 'blabla@bla.bla',
-    login: 'samurai',
+export const initialState: InitialUsersAuthType = {
+    id: 1,
+    email: '',
+    login: '',
     isAuth: false
 }
 
 type ActionUsersAuthType = SetUsersData
-
-
 
 
 export const AuthReducer = (state: InitialUsersAuthType = initialState, action: ActionUsersAuthType): InitialUsersAuthType => {
@@ -32,7 +32,7 @@ export const AuthReducer = (state: InitialUsersAuthType = initialState, action: 
             return {
                 ...state,
                 ...action.data,
-                isAuth: true
+
             }
         default:
             return state
@@ -42,16 +42,41 @@ export const AuthReducer = (state: InitialUsersAuthType = initialState, action: 
 
 
 export const setAuthUsersDataAC = (data: InitialUsersAuthType): SetUsersData => {
-    return {type: "SET-USERS-DATA", data}
+    return {
+        type: "SET-USERS-DATA", data
+
+
+    }
 }
 
-export const  getAuthUsersData = () => (dispatch: Dispatch) => {
-        authApi.me().then(data => {
-            if (data.resultCode === 0) {
-                dispatch(setAuthUsersDataAC(data.data))
-            }
-        })
-    }
+export const getAuthUsersData = () => (dispatch: Dispatch) => {
+    authApi.me().then(response => {
+        if (response.data.resultCode === 0) {
+            dispatch(setAuthUsersDataAC(response.data.data))
+        }
+    })
+}
+
+export const LoginAuth = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
+    authApi.login(email, password, rememberMe).then(response => {
+        if (response.data.resultCode === 0) {
+            dispatch(getAuthUsersData())
+        } else {
+            let message = response.data.messages.length > 0 ? response.data.messages[0]: 'Some Error'
+            let action = stopSubmit('login', {_error: 'Common error'})
+            dispatch(action)
+
+        }
+    })
+}
+
+export const LogoutAuth = () => (dispatch: Dispatch) => {
+    authApi.logout().then(data => {
+        if (data.resultCode === 0) {
+            dispatch(setAuthUsersDataAC(data.data))
+        }
+    })
+}
 
 
 

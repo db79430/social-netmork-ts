@@ -1,4 +1,4 @@
-import {getFollowUsers, getUnFollowUsers, getUsers, getUsers2} from "../api/API";
+import {getFollowUsers, getUnFollowUsers, requestUsers, getUsers2} from "../api/API";
 import {Dispatch} from "redux";
 
 export type UsersType = {
@@ -160,7 +160,7 @@ export const UsersReducer = (state: InitialUsersType = initialState, action: Act
             return {
                 ...state,
                 InProgress: action.isFetching ? [...state.InProgress, action.usersId]
-                    : state.InProgress.filter(id => id != action.usersId)
+                    : state.InProgress.filter(id => id !== action.usersId)
             }
 
         default:
@@ -223,7 +223,8 @@ export const toggleIsFollowingAC = (isFetching: boolean, usersId: number) => {
 export const getUsersThunkCreater = (currentPage: number, pageSize: number) => {
     return (dispatch: Dispatch) => {
         dispatch(setToggleIsFetchingAC(true))
-        getUsers(currentPage, pageSize).then(data => {
+        dispatch(setCurrentPageAC(currentPage))
+        requestUsers(currentPage, pageSize).then(data => {
             dispatch(setToggleIsFetchingAC(false))
             dispatch(setUsersAC(data.items))
             dispatch(setTotalUsersCountAC(data.totalCount))

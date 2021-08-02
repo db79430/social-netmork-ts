@@ -12,6 +12,14 @@ import {UsersFunctional} from './UsersFunctional';
 import {WithAuthRedirect} from '../hoc/WithAuthRedirect';
 import {compose} from 'redux';
 import {Preloader} from '../common/Pleloader';
+import {
+    getCurrentPage,
+    getIsFetching,
+    getIsnProgress,
+    getPageSize,
+    getTotalCount,
+    getUsers
+} from "../Redux/users-selectors";
 
 export type MapStatePropsType = {
     usersPage: InitialUsersType
@@ -86,7 +94,7 @@ class UsersAPIComponents extends React.Component<UsersMapsType> {
 }
 
 
-const mapStateToProps = (state: AppStateType): MapStatePropsType => {
+/*const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         usersPage: state.users,
         pageSize: state.users.pageSize,
@@ -97,9 +105,22 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 
 
     }
+}*/
+const mapStateToProps = (state: AppStateType): MapStatePropsType => {
+    return {
+        usersPage: getUsers(state) ,
+        pageSize: getPageSize(state),
+        totalCount: getTotalCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        InProgress: getIsnProgress(state),
+
+
+    }
 }
+
+
 export default compose<React.ComponentType>(
-    WithAuthRedirect,
     connect(mapStateToProps,
         {
             followThunk,

@@ -11,7 +11,7 @@ import {addSendMessageAC} from "../Redux/dialogs-reducer";
 
 export type ProfilePropsType = {
     profile: any
-    getUsersProfile: (usersId: string) => void
+    getUsersProfile: (usersId: number) => void
     status: string
     updateUserStatus: (status: string) => void
 

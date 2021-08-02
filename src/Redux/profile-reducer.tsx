@@ -110,9 +110,9 @@ export const setStatusProfileAC = (status: string) => {
 
 
 
-export const getUsersProfile = (usersId: number) => {
+export const getUsersProfile = (userId: number) => {
     return (dispatch:Dispatch) => {
-        getProfileUsers(usersId).then(data => {
+        getProfileUsers(userId).then(data => {
            dispatch(setUsersProfileAC(data))
 
         })
@@ -121,9 +121,9 @@ export const getUsersProfile = (usersId: number) => {
 }
 
 
-export const getUserStatus = (usersId: number) => {
+export const getUserStatus = (userId: number) => {
     return (dispatch:Dispatch) => {
-        profileApi.getStatus(usersId).then(response=> {
+        profileApi.getStatus(userId).then(response=> {
             dispatch(setStatusProfileAC(response.data))
 
         })

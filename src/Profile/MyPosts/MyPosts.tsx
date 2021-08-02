@@ -1,9 +1,7 @@
 import React, {ChangeEvent, useState} from "react";
 import s from './MyPosts.module.css';
 import {Post} from "./Posts/Post";
-import {addActionCreater} from "../../Redux/profile-reducer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {DialogsPropsType} from "../../Dialogs/Dialogs";
 import {maxLengthCreater, requiredField} from "../../utils/validators/Validation";
 import {Textarea} from "../../common/FormsControls/Formscontrols";
 

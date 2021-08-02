@@ -20,13 +20,6 @@ type MapStateToPropsType = {
 
 }
 
-/*type MapDispatchToPropsType = {
-    addActionCreater: (postText: string) => void
-    addUPDATEActionCreater : (newText: string) => void
-}*/
-
-
-
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
@@ -35,7 +28,7 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 }
 
 
- export const MyPostsContainer = connect(mapStateToProps, {addActionCreater})(MyPosts)
+export const MyPostsContainer = connect(mapStateToProps, {addActionCreater})(MyPosts)
 
 
 

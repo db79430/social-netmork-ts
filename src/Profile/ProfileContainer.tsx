@@ -16,28 +16,41 @@ type ProfileContainerType = MapStateProfileType & MapDispatchProfileType
 type MapStateProfileType = {
     profile: any
     status: string
+    authorizedUserId: number
+    isAuth: boolean
+
 
 }
 
 
 type MapDispatchProfileType = {
-    getUsersProfile: (usersId: string) => void
-    getUserStatus: (usersId: string) => void
+    getUsersProfile: (userId: number) => void
+    getUserStatus: (userId: number) => void
     updateUserStatus: (status: string) => void
+
+
 }
 
 type MatchParamsType = {
-    usersId: string
+    userId: number
+
 }
 
 type PropsMatchType = RouteComponentProps<MatchParamsType> & ProfileContainerType
 
 class ProfileContainer extends React.Component<PropsMatchType> {
+
     componentDidMount() {
-        let usersId = this.props.match.params.usersId
-        this.props.getUsersProfile(usersId)
-        this.props.getUserStatus(usersId)
-        this.props.updateUserStatus('')
+        let userId = this.props.match.params.userId
+        if (!userId) {
+            userId= this.props.authorizedUserId
+            if (!userId) {
+                this.props.history.push('/login')
+            }
+        }
+        this.props.getUsersProfile(userId)
+        this.props.getUserStatus(userId)
+
 
     }
 
@@ -66,7 +79,10 @@ class ProfileContainer extends React.Component<PropsMatchType> {
 const mapStateToProps = (state: AppStateType): MapStateProfileType => {
     return {
         profile: state.post.profile,
-        status: state.post.status
+        status: state.post.status,
+        isAuth: state.auth.isAuth,
+        authorizedUserId: state.auth.id,
+
     }
 
 }
