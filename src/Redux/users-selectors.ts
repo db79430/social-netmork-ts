@@ -2,7 +2,7 @@ import React from "react";
 import {AppStateType} from "./redux-store";
 
 export const getUsers = (state: AppStateType) => {
-    return state.users
+    return state.users.users.filter(u => true)
 }
 
 export const getPageSize = (state: AppStateType) => {
