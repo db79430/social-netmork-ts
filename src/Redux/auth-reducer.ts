@@ -1,6 +1,8 @@
 import {authApi} from "../api/API";
-import {Dispatch} from "redux";
-import  {stopSubmit} from "redux-form/lib/actions";
+import {Action, Dispatch} from "redux";
+import {FormAction, stopSubmit} from "redux-form/lib/actions";
+import {ThunkAction} from 'redux-thunk'
+import {AppStateType} from "./redux-store";
 
 
 
@@ -57,11 +59,14 @@ export const getAuthUsersData = () => (dispatch: Dispatch) => {
     })
 }
 
-export const LoginAuth = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
+export type ThunkType<TAction extends Action>  = ThunkAction<void, AppStateType, unknown, TAction>
+
+export const LoginAuth = (email: string, password: string, rememberMe: boolean): ThunkType<any> => (dispatch) => {
     authApi.login(email, password, rememberMe).then(response => {
         if (response.data.resultCode === 0) {
-            dispatch(getAuthUsersData())
+          dispatch(getAuthUsersData())
         } else {
+
             let message = response.data.messages.length > 0 ? response.data.messages[0]: 'Some Error'
             let action = stopSubmit('login', {_error: 'Common error'})
             dispatch(action)

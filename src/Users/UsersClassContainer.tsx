@@ -18,11 +18,11 @@ import {
     getIsnProgress,
     getPageSize,
     getTotalCount,
-    getUsers
+    getUsers,
 } from "../Redux/users-selectors";
 
 export type MapStatePropsType = {
-    usersPage: InitialUsersType
+    users: Array<UsersType>
     currentPage: number
     totalCount: number
     pageSize: number
@@ -83,7 +83,7 @@ class UsersAPIComponents extends React.Component<UsersMapsType> {
                              follow={this.props.follow}
                              currentPage={this.props.currentPage}
                              pageSize={this.props.pageSize}
-                             usersPage={this.props.usersPage}
+                             users={this.props.users}
                              totalCount={this.props.totalCount}
                              onPageChange={this.onPageChange}
             />
@@ -94,21 +94,9 @@ class UsersAPIComponents extends React.Component<UsersMapsType> {
 }
 
 
-/*const mapStateToProps = (state: AppStateType): MapStatePropsType => {
-    return {
-        usersPage: state.users,
-        pageSize: state.users.pageSize,
-        totalCount: state.users.totalCount,
-        currentPage: state.users.currentPage,
-        isFetching: state.users.isFetching,
-        InProgress: state.users.InProgress,
-
-
-    }
-}*/
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        usersPage: getUsers(state) ,
+        users: getUsers(state) ,
         pageSize: getPageSize(state),
         totalCount: getTotalCount(state),
         currentPage: getCurrentPage(state),

@@ -32,7 +32,7 @@ export const UsersFunctional = (props: UsersMapsType & OnChangeType) => {
             }
         </div>
         {
-            props.usersPage.users.map(u => <div key={u.id}>
+            props.users.users.map(u => <div key={u.id}>
                 <span>
 
                     <div>

@@ -1,6 +1,6 @@
 
 import {Dispatch} from "redux";
-import {getAuthUsersData} from "./auth-reducer";
+import {getAuthUsersData, ThunkType} from "./auth-reducer";
 
 
 export type InitialAppType = {
@@ -38,7 +38,7 @@ export const setInitializedSuccess = () => ({
     type: "SET-INITIALIZED"
 })
 
-export const initializedApp = () => (dispatch: Dispatch) => {
+export const initializedApp = ():ThunkType<any> => (dispatch) => {
     let promise = dispatch(getAuthUsersData());
    Promise.all([promise]).then(() => {
         dispatch(setInitializedSuccess())
