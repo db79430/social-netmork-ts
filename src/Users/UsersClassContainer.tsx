@@ -2,14 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {AppStateType} from '../Redux/redux-store';
 import {
-     followThunk, getUsersData, getUsersThunkCreater,
-    InitialUsersType,
+    followThunk, getUsersData, getUsersThunkCreater,
     setCurrentPageAC,
     unfollowThunk,
     UsersType,
 } from '../Redux/users-reducer';
 import {UsersFunctional} from './UsersFunctional';
-import {WithAuthRedirect} from '../hoc/WithAuthRedirect';
 import {compose} from 'redux';
 import {Preloader} from '../common/Pleloader';
 import {
@@ -17,8 +15,8 @@ import {
     getIsFetching,
     getIsnProgress,
     getPageSize,
-    getTotalCount,
-    getUsers,
+    getTotalCount, getUsers,
+    getUsersSelector,
 } from "../Redux/users-selectors";
 
 export type MapStatePropsType = {
@@ -96,7 +94,7 @@ class UsersAPIComponents extends React.Component<UsersMapsType> {
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        users: getUsers(state) ,
+        users: getUsers(state),
         pageSize: getPageSize(state),
         totalCount: getTotalCount(state),
         currentPage: getCurrentPage(state),
