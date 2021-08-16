@@ -24,10 +24,11 @@ export type PostDataType = {
 }
 
 
-export const MyPosts = (props: MessagePosts) => {
+export const MyPosts = React.memo((props: MessagePosts) => {
 
 
-    let postElement = props.messagesPost
+    let postElement = [...props.messagesPost]
+        .reverse()
         .map(p => <Post key={p.id} messages={p.message}/>)
 
     let addPostMessage = (values: PostDataType) => {
@@ -45,7 +46,7 @@ export const MyPosts = (props: MessagePosts) => {
         </div>
 
     )
-}
+})
 
 let maxLength10 = maxLengthCreater(10)
 

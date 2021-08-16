@@ -14,7 +14,7 @@ export type InitialUsersAuthType = {
 
 }
 type SetUsersData = {
-    type: "SET-USERS-DATA"
+    type: "samurai-network/auth/SET-USERS-DATA"
     data: InitialUsersAuthType
 }
 
@@ -30,7 +30,7 @@ type ActionUsersAuthType = SetUsersData
 
 export const AuthReducer = (state: InitialUsersAuthType = initialState, action: ActionUsersAuthType): InitialUsersAuthType => {
     switch (action.type) {
-        case "SET-USERS-DATA":
+        case "samurai-network/auth/SET-USERS-DATA":
             return {
                 ...state,
                 ...action.data,
@@ -45,24 +45,24 @@ export const AuthReducer = (state: InitialUsersAuthType = initialState, action: 
 
 export const setAuthUsersDataAC = (data: InitialUsersAuthType): SetUsersData => {
     return {
-        type: "SET-USERS-DATA", data
+        type: "samurai-network/auth/SET-USERS-DATA", data
 
 
     }
 }
 
-export const getAuthUsersData = () => (dispatch: Dispatch) => {
-    authApi.me().then(response => {
+export const getAuthUsersData = () => async(dispatch: Dispatch) => {
+    let response = await authApi.me()
         if (response.data.resultCode === 0) {
             dispatch(setAuthUsersDataAC(response.data.data))
         }
-    })
+
 }
 
 export type ThunkType<TAction extends Action>  = ThunkAction<void, AppStateType, unknown, TAction>
 
-export const LoginAuth = (email: string, password: string, rememberMe: boolean): ThunkType<any> => (dispatch) => {
-    authApi.login(email, password, rememberMe).then(response => {
+export const LoginAuth = (email: string, password: string, rememberMe: boolean): ThunkType<any> => async(dispatch) => {
+    let response = await authApi.login(email, password, rememberMe)
         if (response.data.resultCode === 0) {
           dispatch(getAuthUsersData())
         } else {
@@ -72,15 +72,15 @@ export const LoginAuth = (email: string, password: string, rememberMe: boolean):
             dispatch(action)
 
         }
-    })
+
 }
 
-export const LogoutAuth = () => (dispatch: Dispatch) => {
-    authApi.logout().then(data => {
-        if (data.resultCode === 0) {
-            dispatch(setAuthUsersDataAC(data.data))
+export const LogoutAuth = () => async(dispatch: Dispatch) => {
+    let response = await authApi.logout()
+        if (response.data.resultCode === 0) {
+            dispatch(setAuthUsersDataAC(response.data.data))
         }
-    })
+
 }
 
 

@@ -111,34 +111,34 @@ export const setStatusProfileAC = (status: string) => {
 
 
 export const getUsersProfile = (userId: number) => {
-    return (dispatch:Dispatch) => {
-        getProfileUsers(userId).then(data => {
-           dispatch(setUsersProfileAC(data))
+    return  async (dispatch:Dispatch) => {
+        let response = await getProfileUsers(userId)
+           dispatch(setUsersProfileAC(response.data))
 
-        })
+
 
     }
 }
 
 
 export const getUserStatus = (userId: number) => {
-    return (dispatch:Dispatch) => {
-        profileApi.getStatus(userId).then(response=> {
+    return async (dispatch:Dispatch) => {
+        let response =  await profileApi.getStatus(userId)
             dispatch(setStatusProfileAC(response.data))
 
-        })
+
 
     }
 }
 
 export const updateUserStatus = (status: string) => {
-    return (dispatch: Dispatch) => {
-        profileApi.updateStatus(status).then(response => {
+    return async (dispatch: Dispatch) => {
+        let response = await profileApi.updateStatus(status)
             if (response.data.resultCode === 0) {
                 dispatch(setStatusProfileAC(response.data))
             }
 
-        })
+
     }
 
 }
