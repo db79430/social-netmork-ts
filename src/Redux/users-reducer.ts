@@ -221,57 +221,57 @@ export const toggleIsFollowingAC = (isFetching: boolean, usersId: number) => {
 }
 
 export const getUsersThunkCreater = (currentPage: number, pageSize: number) => {
-    return (dispatch: Dispatch) => {
+    return async (dispatch: Dispatch) => {
         dispatch(setToggleIsFetchingAC(true))
         dispatch(setCurrentPageAC(currentPage))
-        requestUsers(currentPage, pageSize).then(data => {
+        let data = await requestUsers(currentPage, pageSize)
             dispatch(setToggleIsFetchingAC(false))
             dispatch(setUsersAC(data.items))
             dispatch(setTotalUsersCountAC(data.totalCount))
 
 
-        })
+
     }
 }
 
 export const getUsersData = (currentPage: number, pageSize: number) => {
-    return (dispatch: Dispatch) => {
+    return async (dispatch: Dispatch) => {
         dispatch(setCurrentPageAC(currentPage))
-        getUsers2(currentPage, pageSize).then(data => {
+        let data  = await getUsers2(currentPage, pageSize)
             dispatch(setToggleIsFetchingAC(false))
             dispatch(setUsersAC(data.items))
 
-        })
+
     }
 }
 
     export const followThunk = (userId: number) => {
-        return (dispatch: Dispatch) => {
+        return async  (dispatch: Dispatch) => {
             dispatch(toggleIsFollowingAC(true, userId))
 
-            getFollowUsers(userId).then(data => {
+           let data = await getFollowUsers(userId)
                 if (data.resultCode === 0) {
                     dispatch(followAC(userId))
 
                 }
 
-            })
+
 
         }
 
     }
 
     export const unfollowThunk = (userId: number) => {
-        return (dispatch: any) => {
+        return async (dispatch: Dispatch) => {
             dispatch(setToggleIsFetchingAC(true))
 
 
-            getUnFollowUsers(userId).then(response => {
-                if (response.data.resultCode === 0) {
+            let data = await getUnFollowUsers(userId)
+                if (data.resultCode === 0) {
                     dispatch(unfollowAC(userId))
 
                 }
-            })
+
 
         }
     }
