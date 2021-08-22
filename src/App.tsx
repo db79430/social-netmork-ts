@@ -50,7 +50,7 @@ class App extends React.Component<AppPropsType> {
                             <Route path={'/settings'} render={() => <Settings/>}/>
                             <Route path={'/music'} render={() => <Music/>}/>
                             <Route path={'/users'} render={() => <UsersClassContainer/>}/>
-                            <Route path={'/login'} render={() => <Login/>}/>
+                            <Route path={'/login'} render={() => <Login />}/>
                             <Route path={'*'} render={() => <div>404 not found</div>}/>
                         </Switch>
                     </div>

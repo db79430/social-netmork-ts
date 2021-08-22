@@ -114,12 +114,14 @@ export const UsersReducer = (state: InitialUsersType = initialState, action: Act
             return {
                 ...state,
                 users: state.users.map(u => {
-                        if (u.id === action.usersId) {
-                            return {...u, followed: true}
-                        }
-                        return u;
+                    if (u.id === action.usersId) {
+                        return {...u, followed: true}
                     }
+                    return u;
+                }
                 )
+
+
             };
         case 'UNFOLLOW-USERS':
             return {
@@ -169,6 +171,8 @@ export const UsersReducer = (state: InitialUsersType = initialState, action: Act
 
     }
 }
+
+
 export const followAC = (usersId: number) => {
     return {
         type: 'FOLLOW-USERS',
