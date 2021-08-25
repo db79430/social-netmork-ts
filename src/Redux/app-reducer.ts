@@ -1,10 +1,12 @@
 
-import {Dispatch} from "redux";
 import {getAuthUsersData, ThunkType} from "./auth-reducer";
+
+
 
 
 export type InitialAppType = {
     initialized: boolean,
+
 
 
 }

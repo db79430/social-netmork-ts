@@ -42,12 +42,18 @@ export type MapStateDispatchType = {
     followThunk: (userId: number) => void
     unfollowThunk: (userId: number) => void
     getUsersData: (currentPage: number, pageSize: number) => void
+    onPageChange: (numberPage: number) => void
 
 
 }
 
+export type PageSize = {
+    portionSize: number
+    portionNumber: number
+}
 
-export type UsersMapsType = MapStatePropsType & MapStateDispatchType
+
+export type UsersMapsType = MapStatePropsType & MapStateDispatchType & PageSize
 
 
 class UsersAPIComponents extends React.Component<UsersMapsType> {
@@ -66,7 +72,9 @@ class UsersAPIComponents extends React.Component<UsersMapsType> {
             {
                 this.props.isFetching ? <Preloader/> : null
             }
-            <UsersFunctional getUsersData={this.props.getUsersData}
+            <UsersFunctional portionNumber={this.props.portionNumber}
+                             portionSize={this.props.portionSize}
+                             getUsersData={this.props.getUsersData}
                              unfollowThunk={this.props.unfollowThunk}
                              followThunk={this.props.followThunk}
                              getUsersThunkCreater={this.props.getUsersThunkCreater}

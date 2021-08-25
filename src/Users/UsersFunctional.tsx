@@ -1,38 +1,44 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import {UsersMapsType} from "./UsersClassContainer";
-import {followThunk, unfollowThunk} from "../Redux/users-reducer";
+import {followThunk, setCurrentPageAC, unfollowThunk} from "../Redux/users-reducer";
 import styles from './Users.module.css'
+import {Paginator} from "../common/Paginator/Paginator";
 
 
 
 
-type OnChangeType = {
-    onPageChange: (numberPage: number) => void
-
-}
 
 
-export const UsersFunctional = (props: UsersMapsType & OnChangeType) => {
-    let pageCount = Math.ceil(props.totalCount / props.pageSize)
-    let pages = []
-    for (let i = 1; i <= pageCount; i++) {
-        pages.push(i)
-    }
+export const UsersFunctional = (props: UsersMapsType) => {
+
 
     return (<div>
         <div>
-            {
-                pages.map(p => {
-                    return <span
-                        onClick={(e) => {
-                            props.onPageChange(p)
-                        }}>{p}</span>
-                })
-            }
+            <Paginator  portionNumber={props.portionNumber}
+                        portionSize={props.portionSize}
+                        getUsersData={props.getUsersData}
+                        unfollowThunk={props.unfollowThunk}
+                        followThunk={props.followThunk}
+                        getUsersThunkCreater={props.getUsersThunkCreater}
+                        InProgress={props.InProgress}
+                        toggleIsFollowing={props.toggleIsFollowing}
+                        isFetching={props.isFetching}
+                        toggleIsFetching={props.toggleIsFetching}
+                        unfollow={props.unfollow}
+                        setUsers={props.setUsers}
+                        setTotalCounters={setCurrentPageAC}
+                        setCurrentPages={props.setCurrentPages}
+                        follow={props.follow}
+                        currentPage={props.currentPage}
+                        pageSize={props.pageSize}
+                        users={props.users}
+                        totalCount={props.totalCount}
+                        onPageChange={props.onPageChange}/>
         </div>
+
         {
-            props.users.users.map(u => <div key={u.id}>
+            props.users.map(u => <div key={u.id}>
                 <span>
 
                     <div>
@@ -65,11 +71,7 @@ export const UsersFunctional = (props: UsersMapsType & OnChangeType) => {
                     <div>{u.followed}</div>
                     <div>{u.status}</div>
                 </span>
-                  {/*  <span><div>{u.location.city}</div>
-                     <div>{u.location.country}</div>
-
-                </span>*/}
-                </div>
+                   </div>
             )
         }
 
